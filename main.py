@@ -1,6 +1,7 @@
 import pymongo
 import re
-from nltk.corpus
+from nltk.corpus import stopwords
+from sklearn.model_selection import train_test_split
 
 client = pymongo.MongoClient("mongodb://localhost:27017/", serverSelectionTimeoutMS=5000)
 db = client["redditscraper"]
