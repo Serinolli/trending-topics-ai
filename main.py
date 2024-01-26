@@ -20,4 +20,7 @@ post_titles = [post["title"] for post in posts_data]
 tokenized_posts = [word_tokenize(clean_text(title)) for title in post_titles]
 vectorizer = TfidfVectorizer(max_features=5000)  
 X = vectorizer.fit_transform([' '.join(post) for post in tokenized_posts]).toarray()
-print(X)
+
+kmeans = KMeans(n_clusters=5, random_state=42)
+clusters = kmeans.fit_predict(X)
+print(clusters)
