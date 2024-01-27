@@ -23,5 +23,3 @@ X = vectorizer.fit_transform([' '.join(post) for post in tokenized_posts]).toarr
 
 kmeans = KMeans(n_clusters=5, random_state=42)
 clusters = kmeans.fit_predict(X)
-#continue after cluster implentation
-print(clusters)
