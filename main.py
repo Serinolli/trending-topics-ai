@@ -28,7 +28,10 @@ n_clusters = 10
 kmeans = KMeans(n_clusters=n_clusters, random_state=42)
 clusters = kmeans.fit_predict(X)
 
-#starting implementations to validate content
 main_topics = []
 for clusterId in range(n_clusters):
     main_topics.append(GetClusterMainTopics(clusterId, post_titles, clusters[clusterId], tokenized_posts))
+
+for i, topics in enumerate(main_topics):
+    print(f"Main topics of Cluster {i}:")
+    print(", ".join(topics))

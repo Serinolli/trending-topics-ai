@@ -1,7 +1,7 @@
-def GetClusterMainTopics(cluster_id, post_titles, cluster, tokenized_posts, n_top_topics=5):
+def GetClusterMainTopics(cluster_id, post_titles, cluster_data, tokenized_posts, n_top_topics=5):
     cluster_tf = {}
     for i, title in enumerate(post_titles):
-        if cluster == cluster_id:
+        if cluster_data == cluster_id:
             for term in tokenized_posts[i]:
                 cluster_tf[term] = cluster_tf.get(term, 0) + 1
 
