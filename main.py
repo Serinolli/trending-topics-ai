@@ -31,5 +31,5 @@ for cluster_id, _ in sorted_clusters:
     main_topics.append(GetClusterMainTopics(cluster_id, post_titles, clusters, tokenized_posts))
 
 for i, topics in enumerate(main_topics):
-    print(f"Main topics of Cluster {i}:")
+    print(f"Cluster {i}:")
     print(", ".join(topics))
