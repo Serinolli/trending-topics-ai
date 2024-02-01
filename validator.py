@@ -19,16 +19,12 @@ def GetClusterMainTopics(cluster_id, post_titles, clusters, tokenized_posts, n_t
     total_terms = sum(cluster_tf.values())
     cluster_term_weights = {term: freq / total_terms for term, freq in cluster_tf.items()}
 
-    # Flatten the list of lists into a single list of words
     flat_tokenized_posts = list(chain.from_iterable(tokenized_posts))
-
-    # Collocation extraction using BigramCollocationFinder
+    
     bigram_finder = BigramCollocationFinder.from_words(flat_tokenized_posts)
     bigram_scores = bigram_finder.score_ngrams(BigramAssocMeasures.pmi)
 
-    # Combine significant bigrams with unigrams
     significant_terms = set(term for term, score in bigram_scores) | set(cluster_term_weights.keys())
 
-    # Sort terms by frequency-weighted importance
     sorted_terms = sorted(significant_terms, key=lambda term: cluster_term_weights.get(term, 0), reverse=True)[:n_top_topics]
     return sorted_terms
