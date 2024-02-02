@@ -1,8 +1,10 @@
-import pymongo
+# Update import statements to include MWETokenizer
 from nltk.tokenize import word_tokenize
 from sklearn.cluster import KMeans
 from sklearn.feature_extraction.text import TfidfVectorizer
 from validator import clean_text, GetClusterMainTopics
+from nltk.tokenize import MWETokenizer
+import pymongo
 
 client = pymongo.MongoClient("mongodb://localhost:27017/", serverSelectionTimeoutMS=5000)
 db = client["redditscraper"]
@@ -11,7 +13,11 @@ posts_collection = db["posts"]
 posts_data = posts_collection.find()
 post_titles = [post["title"] for post in posts_data]
 
-tokenized_posts = [word_tokenize(clean_text(title)) for title in post_titles]
+mwe_tokenizer = MWETokenizer()
+
+#Seek an better way to deal with multiple worded themes
+mwe_tokenizer.add_mwe(('machine', 'learning'))
+tokenized_posts = [mwe_tokenizer.tokenize(word_tokenize(clean_text(title))) for title in post_titles]
 
 vectorizer = TfidfVectorizer(max_features=5000)  
 X = vectorizer.fit_transform([' '.join(post) for post in tokenized_posts]).toarray()
