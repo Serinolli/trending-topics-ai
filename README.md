@@ -6,5 +6,5 @@ Actual state:
 - [x] Connect to data source
 - [x] Format data that will be consumed
 - [x] Clustering posts
-- [ ] Validate clustered content
+- [x] Validate clustered content
 - [ ] Export analyzed data
