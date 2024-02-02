@@ -11,9 +11,8 @@ def outputClusterInfo(clusters):
         plt.axis('off')
         plt.show()
 
-    # Create bar charts for each cluster
     for cluster, terms in clusters.items():
-        term_freq = {}  # Dictionary to store term frequencies
+        term_freq = {}  
         for term in terms:
             term_freq[term] = term_freq.get(term, 0) + 1
 
