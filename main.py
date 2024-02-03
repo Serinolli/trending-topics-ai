@@ -2,7 +2,7 @@ from nltk.tokenize import word_tokenize
 from sklearn.cluster import KMeans
 from sklearn.feature_extraction.text import TfidfVectorizer
 from validator import clean_text, GetClusterMainTopics
-from output import outputClusterInfo
+from output import outputClustersInfo
 from nltk.tokenize import MWETokenizer
 import pymongo
 
@@ -37,4 +37,4 @@ main_topics = []
 for cluster_id, _ in sorted_clusters:
     main_topics.append(GetClusterMainTopics(cluster_id, post_titles, clusters, tokenized_posts))
 
-outputClusterInfo(main_topics)
+outputClustersInfo(main_topics)
