@@ -16,8 +16,8 @@ def GetClusterMainTopics(cluster_id, post_titles, clusters, tokenized_posts, n_t
             for term in tokenized_posts[i]:
                 cluster_tf[term] = cluster_tf.get(term, 0) + 1
 
-    total_terms = sum(cluster_tf.values())
-    cluster_term_weights = {term: freq / total_terms for term, freq in cluster_tf.items()}
+    totalTerms = sum(cluster_tf.values())
+    cluster_term_weights = {term: freq / totalTerms for term, freq in cluster_tf.items()}
 
     flat_tokenized_posts = list(chain.from_iterable(tokenized_posts))
     
@@ -26,5 +26,5 @@ def GetClusterMainTopics(cluster_id, post_titles, clusters, tokenized_posts, n_t
 
     significantTerms = set(term for term, score in bigramScores) | set(cluster_term_weights.keys())
 
-    sorted_terms = sorted(significantTerms, key=lambda term: cluster_term_weights.get(term, 0), reverse=True)[:n_top_topics]
-    return sorted_terms
+    sortedTerms = sorted(significantTerms, key=lambda term: cluster_term_weights.get(term, 0), reverse=True)[:n_top_topics]
+    return sortedTerms
