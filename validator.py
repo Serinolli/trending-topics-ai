@@ -21,10 +21,10 @@ def GetClusterMainTopics(cluster_id, post_titles, clusters, tokenized_posts, n_t
 
     flat_tokenized_posts = list(chain.from_iterable(tokenized_posts))
     
-    bigram_finder = BigramCollocationFinder.from_words(flat_tokenized_posts)
-    bigram_scores = bigram_finder.score_ngrams(BigramAssocMeasures.pmi)
+    bigramFinder = BigramCollocationFinder.from_words(flat_tokenized_posts)
+    bigramScores = bigramFinder.score_ngrams(BigramAssocMeasures.pmi)
 
-    significant_terms = set(term for term, score in bigram_scores) | set(cluster_term_weights.keys())
+    significantTerms = set(term for term, score in bigramScores) | set(cluster_term_weights.keys())
 
-    sorted_terms = sorted(significant_terms, key=lambda term: cluster_term_weights.get(term, 0), reverse=True)[:n_top_topics]
+    sorted_terms = sorted(significantTerms, key=lambda term: cluster_term_weights.get(term, 0), reverse=True)[:n_top_topics]
     return sorted_terms
